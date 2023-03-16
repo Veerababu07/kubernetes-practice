@@ -1,0 +1,30 @@
+apiversion: batch/v1
+kind: cornjob
+metadata:
+  name: myapp-nginx
+  namespace: my-namespace
+spec:
+  schedule: ' * 1 * * * '
+  jobtemplate:
+    metadata:
+      name: jobbuilding
+    spec:
+      backofflimit: 6
+      matchLabels: 
+        purpose: download
+      template:
+        metadata:
+          name: downloding-spring
+          labels: 
+        spec:
+          containers: 
+            - name: download
+              image: alpine:3
+              command: 
+                - wget
+                - https://referenceapplicationskhaja.s3.us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar
+
+
+
+
+  
